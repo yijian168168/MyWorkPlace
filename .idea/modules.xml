@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/CommonsConfiguration/CommonsConfiguration.iml" filepath="$PROJECT_DIR$/CommonsConfiguration/CommonsConfiguration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EncryUtils/EncryUtils.iml" filepath="$PROJECT_DIR$/EncryUtils/EncryUtils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HttpClient/HttpClient.iml" filepath="$PROJECT_DIR$/HttpClient/HttpClient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JDBC_Simple/JDBC_Simple.iml" filepath="$PROJECT_DIR$/JDBC_Simple/JDBC_Simple.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Jedis_demo1/Jedis_demo1.iml" filepath="$PROJECT_DIR$/Jedis_demo1/Jedis_demo1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyBatis/MyBatis.iml" filepath="$PROJECT_DIR$/MyBatis/MyBatis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyBatis_demo1/MyBatis_demo1.iml" filepath="$PROJECT_DIR$/MyBatis_demo1/MyBatis_demo1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyWorkPlace.iml" filepath="$PROJECT_DIR$/MyWorkPlace.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ReadAndWriteCVS/ReadAndWriteCVS.iml" filepath="$PROJECT_DIR$/ReadAndWriteCVS/ReadAndWriteCVS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ReadExcel/ReadExcel.iml" filepath="$PROJECT_DIR$/ReadExcel/ReadExcel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Socket/Socket.iml" filepath="$PROJECT_DIR$/Socket/Socket.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringAop/SpringAop.iml" filepath="$PROJECT_DIR$/SpringAop/SpringAop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringBoot/SpringBoot.iml" filepath="$PROJECT_DIR$/SpringBoot/SpringBoot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringHessian/SpringHessian.iml" filepath="$PROJECT_DIR$/SpringHessian/SpringHessian.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringMVC_Exception/SpringMVC_Exception.iml" filepath="$PROJECT_DIR$/SpringMVC_Exception/SpringMVC_Exception.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringMVC_demo1/SpringMVC_demo1.iml" filepath="$PROJECT_DIR$/SpringMVC_demo1/SpringMVC_demo1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringMVC_demo2/SpringMVC_demo2.iml" filepath="$PROJECT_DIR$/SpringMVC_demo2/SpringMVC_demo2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Struts2/Struts2.iml" filepath="$PROJECT_DIR$/Struts2/Struts2.iml" />
+    </modules>
+  </component>
+</project>
