@@ -1,0 +1,8 @@
+
+在Windows环境下开启Redis
+1.运行cmd，进入命令窗口，进入到Redis目录
+2.运行指令：redis-server.exe redis.conf
+3.重新打开一个命令窗口，进入Redis目录
+4.运行指令：redis-cli.exe -h 127.0.0.1 -p 6379
+
+注：-h , -p 分别对应Redis服务的IP和端口
