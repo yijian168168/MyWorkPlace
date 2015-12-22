@@ -1,2 +1,2 @@
-Spring����Mybatis
-ʵ�ֶ����ݿ����ɾ�Ĳ����
+Spring集成Mybatis
+实现对数据库的增删改查操作

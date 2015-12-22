@@ -24,7 +24,7 @@ public class test {
     private UserService userService;
 
     /**
-     * 执行保存操作
+     * 鎵ц淇濆瓨鎿嶄綔
      */
     @Test
     public void testSave() {
@@ -39,7 +39,7 @@ public class test {
     }
 
     /**
-     * 执行删除操作
+     * 鎵ц鍒犻櫎鎿嶄綔
      */
     @Test
     public void testDelete() {
@@ -48,7 +48,7 @@ public class test {
     }
 
     /**
-     * 执行更新操作
+     * 鎵ц鏇存柊鎿嶄綔
      */
     @Test
     public void testUpdate() {
@@ -62,7 +62,7 @@ public class test {
     }
 
     /**
-     * 执行查找操作
+     * 鎵ц鏌ユ壘鎿嶄綔
      */
     @Test
     public void testFindByID() {
@@ -72,7 +72,7 @@ public class test {
     }
 
     /**
-     * 执行查找全部操作
+     * 鎵ц鏌ユ壘鍏ㄩ儴鎿嶄綔
      */
     @Test
     public void testFindAll() {
@@ -82,7 +82,7 @@ public class test {
     }
 
     /**
-     * 执行添加用户操作
+     * 鎵ц娣诲姞鐢ㄦ埛鎿嶄綔
      * */
     @Test
     public void addAddress(){
@@ -90,13 +90,13 @@ public class test {
         user.setBirthday(new Date());
         user.setName("xiaoqin");
         user.setSalary(4000.00);
-        Address address = new Address("00001","长湴");
+        Address address = new Address("00001","闀挎勾");
         userService.addAddress(user, address);
     }
 
     @Test
     public void findByAddress(){
-        Address address = new Address("00001","长湴");
+        Address address = new Address("00001","闀挎勾");
         List<User> users = userService.findByAddress(address);
         System.out.println(users);
     }

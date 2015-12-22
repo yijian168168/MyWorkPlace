@@ -14,29 +14,29 @@ import java.util.List;
 public interface UserMapper {
 
     /**
-     * Èë²ÎÊÇÒ»¸ö¶ÔÏó
+     * å…¥å‚æ˜¯ä¸€ä¸ªå¯¹è±¡
      * */
     public void save(User user);
 
     /**
-     * Èë²ÎÊÇ»ù±¾ÀàĞÍ
+     * å…¥å‚æ˜¯åŸºæœ¬ç±»å‹
      * */
     public void delete(int id);
 
     public void update(User user);
 
     /**
-     * ·µ»Ø²ÎÊıÊÇÒ»¸ö¶ÔÏó
+     * è¿”å›å‚æ•°æ˜¯ä¸€ä¸ªå¯¹è±¡
      * */
     public User findByID(int id);
 
     /**
-     * ·µ»Ø²ÎÊıÊÇÒ»¸ö¼¯ºÏ
+     * è¿”å›å‚æ•°æ˜¯ä¸€ä¸ªé›†åˆ
      * */
     public List<User> findAll();
 
     /**
-     * Èë²ÎÊÇÁ½¸ö²ÎÊı
+     * å…¥å‚æ˜¯ä¸¤ä¸ªå‚æ•°
      * */
     public void addAddress(@Param("user") User user,@Param("address")Address address);
 

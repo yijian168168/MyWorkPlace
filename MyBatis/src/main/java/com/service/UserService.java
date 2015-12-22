@@ -19,39 +19,39 @@ public class UserService {
     private UserMapper userMapper;
 
     public void save(User user){
-        System.out.println("save¡£¡£¡£");
+        System.out.println("saveã€‚ã€‚ã€‚");
         userMapper.save(user);
     }
 
     public void delete(int id){
-        System.out.println("delete¡£¡£¡£");
+        System.out.println("deleteã€‚ã€‚ã€‚");
         userMapper.delete(id);
     }
 
     public void update(User user){
-        System.out.println("update¡£¡£¡£");
+        System.out.println("updateã€‚ã€‚ã€‚");
         userMapper.update(user);
     }
 
     public User findByID(int id){
-        System.out.println("findByID¡£¡£¡£");
+        System.out.println("findByIDã€‚ã€‚ã€‚");
         User user = userMapper.findByID(id);
         return user;
     }
 
     public List<User> findAll(){
-        System.out.println("findAll¡£¡£¡£");
+        System.out.println("findAllã€‚ã€‚ã€‚");
         List<User> users = userMapper.findAll();
         return users;
     }
 
     public void addAddress(User user,Address address){
-        System.out.println("addAddress¡£¡£¡£");
+        System.out.println("addAddressã€‚ã€‚ã€‚");
         userMapper.addAddress(user,address);
     }
 
     public List<User> findByAddress(Address address){
-        System.out.println("findByAddress¡£¡£¡£");
+        System.out.println("findByAddressã€‚ã€‚ã€‚");
         List<User> users = userMapper.findByAddress(address);
         return users;
     }
