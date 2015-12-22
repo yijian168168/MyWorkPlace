@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace属性对应的值必须与接口类的全类名一致
+    id属性对应的值必须与方法名一致
+-->
+
+<mapper namespace="com.mappers.UserMapper">
+
+    <!--添加一个User对象到数据库-->
+    <insert id="save" parameterType="User" >
+        INSERT INTO s_user (user_name,user_birthday,user_salary) VALUES (#{name},#{birthday},#{salary});
+    </insert>
+
+    <!--删除一个User对象-->
+    <delete id="delete" parameterType="int" >
+        DELETE FROM s_user where user_id=#{id};
+    </delete>
+
+    <!--更新一个User对象-->
+    <update id="update" parameterType="User">
+        UPDATE s_user SET user_name=#{name},user_birthday=#{birthday},user_salary=#{salary} WHERE user_id=#{id};
+    </update>
+
+    <!--根据id属性查找一个User对象-->
+    <select id="findByID" parameterType="int" resultType="User">
+        SELECT user_id id, user_name name, user_birthday birthday , user_salary salary FROM s_user WHERE user_id=#{id};
+    </select>
+
+    <!--查找所有的User对象-->
+    <select id="findAll" resultType="User">
+        SELECT user_id id, user_name name, user_birthday birthday , user_salary salary FROM s_user;
+    </select>
+
+</mapper>
