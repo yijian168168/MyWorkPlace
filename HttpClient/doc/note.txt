@@ -1,0 +1,98 @@
+一、连接池最大数，单rount的连接池最大数，会有什么影响
+    假如'http.conn-manager.max-total'设定为100，‘http.conn-manager.max-per-route’设定为20，
+    而如果你的client用于访问5个以上的rount时，在访问某个rount而连接池已经满了时，需要为这个rount打开新连接，则会按顺序执行以下操作：
+    1. 如果该rount的‘http.conn-manager.max-per-route’已经达到20个，故会等待连接池拿连接。
+    2. 如果未达到20个，则需要关闭连接池的另外一个rount的已经打开但空闲的连接。如果实在没有空闲连接，则等待连接池拿连接。
+二、连接相关 （分析ClientConnectionManager，SingleClientConnManager和ThreadSafeClientConnManager）
+    (1) 单线程和多线程
+        SingleClientConnManager和ThreadSaleClientConnManager，每个HttpClient对象，都需要定义其ClientConnectionManager，
+        如果该HttpClient用于单线程环境，则用SingleClientConnManager；如果该HttpClient用于多线程环境，则用ThreadSaleClientConnManager；
+    (2) 连接的参数设置
+    (3) 归还连接到连接池
+        关闭连接，释放资源：
+        httpClient.getConnectionManager().shutdown();//关闭该connManager对应的所有连接
+    (4) 连接回收的策略--连接管理者会隔一段时间回收长期不用的連接。
+        void closeIdleConnections(long idletime, TimeUnit tunit) //关闭空闲的连接
+        void closeExpiredConnections(); //
+    (5) 连接keepalive的策略
+        某些场合不适合用keepalive：对服务器访问仅仅一次。
+    (6) HttpClient和ClientConnectionManager是什么关系？多个HttpClient可以和1个ClientConnectionManager对应吗？如果可以，是什么关系？
+
+    (7) DefaultHttpClient是线程安全的.具体解释下？
+
+    (8)Getmethod是否可以复用? 是否只用于一次请求?
+
+    (9)只在io阻塞时能够感知连接的状态？
+
+    (10)ClientConnectionManager对象能得到所有连接的当前状态吗?
+
+    (11) cookies安全属性干嘛的?
+
+    (12)客户端怎样主动关闭连接，怎么知道服务端关闭连接了，且该怎麼应对。
+
+    (13) Keepalive在Tcp是怎么实现的? 对于HttpClient，设置keepalive=true它会怎么处理该连接？设置了keepalive=false，它又会如何处理该连接？
+
+    (14) 设置SNDBUF,RECBUF并不保证成功。
+
+
+    (15) SO_LINGER的作用，一般设置为false.
+    (16) Negile是什么?为了性能，一般要禁止。
+    (17) 什么叫连接超时，读超时？ 超时的代码实现。
+         关于连接超时：
+        Socket类的 void connect(SocketAddress endpoint, int timeout)
+        具体实现超时是一个native的方法：PlainSocketImpl#socketConnect(InetAddress address, int port, int timeout)。
+        低层还是调用了操作系统的Socket接口。
+        TCP协议没有规定连接超时的时间应该是多少，大多数linux操作系统的连接建立的默认的超时时间是75秒。
+        不过，java的本地方法socketConnect实现时，让默认的超时时间为永远不超时，可能是用重试的方式。
+
+    (18) HttpClient使用HttpURLConnection了吗？还是直接用Socket？
+        没使用HttpURLConnection，直接使用了Socket。
+
+    (19) 看看SocketOptions类
+
+    (20) 什么是读超时和连接超时，是TCP的概念还是套接字概念。
+
+    (21) 如果超时控制是应用层实现而不是tcp本身实现，那么超时后应用层会如何处理连接?例如这时主机和客户端正好在进行tcp的三次握手过程，怎么办？
+
+    (22)连接超时的时间，实际是指“建立三次握手，以达到ETABLISHED状态的时间”
+        连接超时，在HttoClient有ConnectTimeOut选项，在Socket是connect方法的timeout参数，本质上这个时间是指客户端和服务器建立三次握手，以达到ETABLISHED状态的时间。
+
+    (23)HttpEntity的consumeContent方法，用keepalive的话，它很重要！
+        consumeContent会把本地接收端的该套接字的buffer读取到空为止，这样，该套接字在接下来的另一个请求/响应才能正常使用。可以结合keppalive的流水线设计进行讲解。
+        /**
+        * TODO: The name of this method is misnomer. It will be renamed to
+        * #finish() in the next major release.
+        * <br/>
+        * This method is called to indicate that the content of this entity
+        * is no longer required. All entity implementations are expected to
+        * release all allocated resources as a result of this method
+        * invocation. Content streaming entities are also expected to
+        * dispose of the remaining content, if any. Wrapping entities should
+        * delegate this call to the wrapped entity.
+        * <br/>
+        * This method is of particular importance for entities being
+        * received from a {@link HttpConnection connection}. The entity
+        * needs to be consumed completely in order to re-use the connection
+        * with keep-alive.
+        *
+        * @throws IOException if an I/O error occurs.
+        *          This indicates that connection keep-alive is not possible.
+        */
+        void consumeContent() throws IOException;
+
+
+三、Http协议相关
+    (1)trunked
+        apache或tomcat什么时候会自动使用“Transfer-Encoding：  chunked”？ 我们怎么强行指定服务器或HttpClient使用trunked？
+
+    (2)content-type
+
+    (3)content-length
+
+    (4)head，put，delete，trace
+        HttpClient支持这些方法，
+        大多数浏览器不支持这些方法，
+        apache可选择的配置这些方法。
+
+    (5)http  pipeline
+        主要优化点是：减少了等待时间。
