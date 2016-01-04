@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!--配置数据源-->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${name}"/>
+        <property name="password" value="${password}"/>
+        <!-- 数据库连接池保持的最小连接数 -->
+        <property name="minIdle" value="5" />
+        <!-- 数据库连接池保持的最大连接数 -->
+        <property name="maxIdle" value="30" />
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <!-- 注意：我用的是Annotation的方式配置的Hibernate，这里的property的name是annotatedClasses -->
+        <property name="annotatedClasses">
+            <list>
+                <value>com.hibernate.dao.User</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <!-- 设置Hibernate方言 -->
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <!-- 是否打印sql -->
+                <prop key="hibernate.show_sql">true</prop>
+                <!-- 格式化sql -->
+                <prop key="hibernate.format_sql">true</prop>
+                <!-- 是否自动更新表 -->
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.current_session_context_class">thread</prop>
+                <!-- 最大抓取深度，如果为0，则关闭默认的外连接抓取。建议值为0-3 -->
+                <prop key="hibernate.max_fetch_depth">1</prop>
+                <!-- 用于生成有助于调试的注释信息，默认为关闭 -->
+                <prop key="hibernate.use_sql_comments">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--配置事务管理-->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager" >
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+</beans>
