@@ -1,0 +1,14 @@
+BIO，即阻塞IO，在基于Socket的消息通信过程中，Socket服务端向外部提供服务，而Socket客户端可以建立到Socket服务端的连接，进而发送请求数据，然后等待Socket服务端处理，并返回处理结果（响应）。
+基于BIO的通信，Socket服务端会发生阻塞，即在监听过程中每次accept到一个客户端的Socket连接，就要处理这个请求，而此时其他连接过来的客户端只能阻塞等待。可见，这种模式下Socket服务端的处理能力是非常有限的，客户端也只能等待，直到服务端空闲时进行请求的处理。
+BIO通信实现
+下面基于BIO模式，来实现一个简单的Socket服务端与Socket客户端进行通信的逻辑，对这种通信方式有一个感性的认识。具体逻辑描述如下：
+1、Socket客户端连接到Socket服务端，并发送数据“I am the client N.”；
+2、Socket服务端，监听服务端口，并接收客户端请求数据，如果请求数据以“I am the client”开头，则响应客户端“I am the server, and you are the Nth client.”；
+
+首先启动Socket服务端进程SimpleBioTcpServer，然后再运行Socket客户端SimpleBioTcpClient。可以看到，服务端接收到请求数据，然后响应客户端，客户端接收到了服务端的响应数据。
+上述实现中，对于Socket客户端和服务端都是一次写入，并一次读出，而在实际中如果每次通信过程中数据量特别大的话，服务器端是不可能接受的，可以在确定客户端请求数据字节数的情况，循环来读取并进行处理。
+另外，对于上述实现中流没有进行装饰（Wrapped）处理，在实际中会有性能的损失，如不能缓冲等。
+对于Socket服务端接收数据，如果可以使多次循环读取到的字节数据通过一个可变长的字节缓冲区来存储，就能方便多了，可是使用ByteArrayOutputStream，例如：
+ByteArrayOutputStream data = new ByteArrayOutputStream();
+data.write(receiveBuffer, totalBytes , totalBytes + receiveBytes);
+
