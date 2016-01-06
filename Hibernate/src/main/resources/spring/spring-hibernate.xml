@@ -18,11 +18,7 @@
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <!-- 注意：我用的是Annotation的方式配置的Hibernate，这里的property的name是annotatedClasses -->
-        <property name="annotatedClasses">
-            <list>
-                <value>com.hibernate.dao.User</value>
-            </list>
-        </property>
+        <property name="packagesToScan" value="com.hibernate.dao" />
         <property name="hibernateProperties">
             <props>
                 <!-- 设置Hibernate方言 -->
