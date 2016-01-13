@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tran>
+    <Header>
+        <bookName>$!{Book.bookName}</bookName>
+        <bookPrice>$!{Book.bookPrice}</bookPrice>
+    </Header>
+</Tran>##
+##能够去掉换行符
