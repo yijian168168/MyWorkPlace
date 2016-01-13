@@ -35,7 +35,7 @@ public class WriteExcel {
 
             //创建第一行
             HSSFRow r0 = sheet.createRow(rowNum);
-            List<String> r0Values = Arrays.asList("订单日期","单号", "客户名称", "电话", "客户付款日期", "交公司日期", "快递运单号", "客户签收日期", "确认收货时间", "产品代码", "产品名称", "规格", "批价", "数量", "折扣", "金额", "快递费用", "应收金额", "备注");
+            List<String> r0Values = Arrays.asList("订单日期","单号", "客户名称", "电话", "是否付款", "产品代码", "产品名称", "规格", "批价", "数量", "折扣", "金额", "快递费用", "应收金额", "备注");
             for (int i = 0; i < r0Values.size(); i++) {
                 HSSFCell r0ci = r0.createCell(i);
                 r0ci.setCellValue(r0Values.get(i));
@@ -48,7 +48,7 @@ public class WriteExcel {
                     sheet.createRow(++rowNum);
                 }
                 //合并单元格
-                for (int j = 0; j < 8; j++) {
+                for (int j = 0; j < 5; j++) {
                     CellRangeAddress cra = new CellRangeAddress(rowNum-orders.size() + 1, rowNum, j, j);
                     sheet.addMergedRegion(cra);
                 }
@@ -65,30 +65,30 @@ public class WriteExcel {
 
                 for (int j = 0; j < orders.size(); j++) {
                     HSSFRow rj = sheet.getRow(rowNum-orders.size() + j + 1);
-                    HSSFCell rjc9 = rj.createCell(9);
+                    HSSFCell rjc9 = rj.createCell(5);
                     rjc9.setCellValue(orders.get(j).getProductId());
-                    HSSFCell rjc10 = rj.createCell(10);
+                    HSSFCell rjc10 = rj.createCell(6);
                     rjc10.setCellValue(orders.get(j).getProductName());
-                    HSSFCell rjc11 = rj.createCell(11);
+                    HSSFCell rjc11 = rj.createCell(7);
                     rjc11.setCellValue(orders.get(j).getSize());
-                    HSSFCell rjc12 = rj.createCell(12);
+                    HSSFCell rjc12 = rj.createCell(8);
                     rjc12.setCellValue(orders.get(j).getPrice());
-                    HSSFCell rjc13 = rj.createCell(13);
+                    HSSFCell rjc13 = rj.createCell(9);
                     rjc13.setCellValue(orders.get(j).getNum());
-                    HSSFCell rjc14 = rj.createCell(14);
+                    HSSFCell rjc14 = rj.createCell(10);
                     rjc14.setCellValue(orders.get(j).getDiscount());
-                    HSSFCell rjc15 = rj.createCell(15);
+                    HSSFCell rjc15 = rj.createCell(11);
                     rjc15.setCellValue(orders.get(j).getSum());
                 }
-                for (int j = 16; j < 19; j++) {
+                for (int j = 12; j < 15; j++) {
                     CellRangeAddress cra = new CellRangeAddress(rowNum -orders.size() + 1, rowNum, j, j);
                     sheet.addMergedRegion(cra);
                 }
-                HSSFCell rjc16 = ri.createCell(16);
+                HSSFCell rjc16 = ri.createCell(12);
                 rjc16.setCellValue(sheets.get(i).getEmailFei());
-                HSSFCell rjc17 = ri.createCell(17);
+                HSSFCell rjc17 = ri.createCell(13);
                 rjc17.setCellValue(sheets.get(i).getAllPrice());
-                HSSFCell rjc18 = ri.createCell(18);
+                HSSFCell rjc18 = ri.createCell(14);
                 rjc18.setCellValue(sheets.get(i).getReverse());
             }
 

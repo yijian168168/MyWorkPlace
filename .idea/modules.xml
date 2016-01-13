@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CommonsConfiguration/CommonsConfiguration.iml" filepath="$PROJECT_DIR$/CommonsConfiguration/CommonsConfiguration.iml" />
       <module fileurl="file://$PROJECT_DIR$/EncryUtils/EncryUtils.iml" filepath="$PROJECT_DIR$/EncryUtils/EncryUtils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Hibernate/Hibernate.iml" filepath="$PROJECT_DIR$/Hibernate/Hibernate.iml" />
       <module fileurl="file://$PROJECT_DIR$/HttpClient/HttpClient.iml" filepath="$PROJECT_DIR$/HttpClient/HttpClient.iml" />
       <module fileurl="file://$PROJECT_DIR$/JDBC_Simple/JDBC_Simple.iml" filepath="$PROJECT_DIR$/JDBC_Simple/JDBC_Simple.iml" />
       <module fileurl="file://$PROJECT_DIR$/Jedis_demo1/Jedis_demo1.iml" filepath="$PROJECT_DIR$/Jedis_demo1/Jedis_demo1.iml" />
@@ -20,6 +21,7 @@
       <module fileurl="file://$PROJECT_DIR$/SpringMVC_demo1/SpringMVC_demo1.iml" filepath="$PROJECT_DIR$/SpringMVC_demo1/SpringMVC_demo1.iml" />
       <module fileurl="file://$PROJECT_DIR$/SpringMVC_demo2/SpringMVC_demo2.iml" filepath="$PROJECT_DIR$/SpringMVC_demo2/SpringMVC_demo2.iml" />
       <module fileurl="file://$PROJECT_DIR$/Struts2/Struts2.iml" filepath="$PROJECT_DIR$/Struts2/Struts2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/XMLUtils/XMLUtils.iml" filepath="$PROJECT_DIR$/XMLUtils/XMLUtils.iml" />
     </modules>
   </component>
 </project>

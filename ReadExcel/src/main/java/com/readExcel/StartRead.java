@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
 
 /**
@@ -84,9 +84,24 @@ public class StartRead extends JFrame {
     public void startreadAndWrite(String filePath,String writeFilePath,String writeFileName){
         File allExcelFile = new File(filePath);
         File[] excelfiles = allExcelFile.listFiles();
+        //排序
+        List<File> fileSort = new ArrayList<File>();
+        for (File file:excelfiles){
+            fileSort.add(file);
+        }
+        Collections.sort(fileSort, new Comparator<File>() {
+            public int compare(File o1, File o2) {
+                String fileName1 = o1.getName().substring(1,9);
+                String fileName2 = o2.getName().substring(1,9);
+                int date1 = Integer.parseInt(fileName1);
+                int date2 = Integer.parseInt(fileName2);
+                return date1-date2;
+            }
+        });
+
         ReadExcel readExcel = new ReadExcel();
         List<Sheet> sheets = new ArrayList<Sheet>();
-        for (File file : excelfiles) {
+        for (File file : fileSort) {
             if (file.getName().endsWith("xls") || file.getName().endsWith("xlsx")) {
                 sheets.addAll(readExcel.read(file));
             }

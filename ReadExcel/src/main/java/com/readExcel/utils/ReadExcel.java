@@ -88,8 +88,9 @@ public class ReadExcel {
                     List<Order> orderList = new ArrayList<Order>();
                     for (int i = 4; i < st.getLastRowNum(); i++) {
                         HSSFRow ri = st.getRow(i);
+                        if (null == ri)continue;
                         Order order = new Order();
-                        if (HSSFCell.CELL_TYPE_NUMERIC == ri.getCell(3).getCellType()) {
+                        if (null != ri.getCell(3) && HSSFCell.CELL_TYPE_NUMERIC == ri.getCell(3).getCellType()) {
                             //产品代码
                             String ric0Value = readOneCell(ri.getCell(0));
                             order.setProductId(ric0Value);
@@ -213,8 +214,9 @@ public class ReadExcel {
                     List<Order> orderList = new ArrayList<Order>();
                     for (int i = 4; i < st.getLastRowNum(); i++) {
                         XSSFRow ri = st.getRow(i);
+                        if (null == ri)continue;
                         Order order = new Order();
-                        if (XSSFCell.CELL_TYPE_NUMERIC == ri.getCell(3).getCellType()) {
+                        if (null != ri.getCell(3) && XSSFCell.CELL_TYPE_NUMERIC == ri.getCell(3).getCellType()) {
                             //产品代码
                             String ric0Value = readOneCellX(ri.getCell(0));
                             order.setProductId(ric0Value);
@@ -273,6 +275,7 @@ public class ReadExcel {
 
                     sheets.add(sheet);
                 }
+
                 in.close();
                 return sheets;
             } catch (IOException e) {

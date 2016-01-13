@@ -23,6 +23,8 @@
         <option value="$PROJECT_DIR$/SpringMVC_demo2/pom.xml" />
         <option value="$PROJECT_DIR$/SpringMVC_Exception/pom.xml" />
         <option value="$PROJECT_DIR$/Struts2/pom.xml" />
+        <option value="$PROJECT_DIR$/Hibernate/pom.xml" />
+        <option value="$PROJECT_DIR$/XMLUtils/pom.xml" />
       </list>
     </option>
   </component>
