@@ -1,0 +1,25 @@
+五、高级同步机制（比synchronized更灵活的加锁机制）
+synchronized和volatile，以及wait、notify等方法抽象层次低，在程序开发中使用比较繁琐，易出错。
+而多线程之间的交互来说，存在某些固定的模式，如生产者-消费者和读者-写者模式，把这些模式抽象成高层API，使用起来会非常方便。
+java.util.concurrent包为多线程提供了高层的API，满足日常开发中的常见需求。
+常用接口
+1、Lock接口，表示一个锁方法：
+    a、lock()，获取所，如果无法获取所锁，会处于等待状态
+    b、unlock()，释放锁。（一般放在finally代码块中）
+    c、lockInterruptibly()，与lock()类似，但允许当前线程在等待获取锁的过程中被中断。（所以要处理InterruptedException）
+    d、tryLock()，以非阻塞方式获取锁，如果无法获取锁，则返回false。（tryLock()的另一个重载可以指定超时，如果指定超时，当无法获取锁，会等待而阻塞，同时线程可以被中断）
+2、ReadWriteLock接口，表示两个锁，读取的共享锁和写入的排他锁。（适合常见的读者--写者场景）
+    ReadWriteLock接口的readLock和writeLock方法来获取对应的锁的Lock接口的实现。
+    在多数线程读取，少数线程写入的情况下，可以提高多线程的性能，提高使用该数据结构的吞吐量。
+    如果是相反的情况，较多的线程写入，则接口会降低性能。
+3、ReentrantLock类和ReentrantReadWriteLock，分别为上面两个接口的实现类。
+    他们具有重入性：即允许一个线程多次获取同一个锁（他们会记住上次获取锁并且未释放的线程对象，和加锁的次数，getHoldCount()）
+    同一个线程每次获取锁，加锁数+1，每次释放锁，加锁数-1，到0，则该锁被释放，可以被其他线程获取。
+    注：重入性减少了锁在各个线程之间的等待，例如便利一个HashMap，每次next()之前加锁，之后释放，可以保证一个线程一口气完成便利，而不会每次next()之后释放锁，然后和其他线程竞争，降低了加锁的代价， 提供了程序整体的吞吐量。（即，让一个线程一口气完成任务，再把锁传递给其他线程）。
+4、Condition接口，Lock接口代替了synchronized，Condition接口替代了object的wait、nofity。
+    a、await()，使当前线程进入等待状态，知道被唤醒或中断。重载形式可以指定超时时间。
+    b、awaitNanos()，以纳秒为单位等待。
+    c、awaitUntil()，指定超时发生的时间点，而不是经过的时间，参数为java.util.Date。
+    d、awaitUninterruptibly()，前面几种会响应其他线程发出的中断请求，他会无视，直到被唤醒。
+        注：与Object类的wait()相同，await()会释放其所持有的锁。
+    e、signal()和signalAll， 相当于 notify和notifyAll

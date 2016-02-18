@@ -22,6 +22,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="Algorithm" />
         <module name="CommonsConfiguration" />
         <module name="EncryUtils" />
         <module name="Hibernate" />
@@ -37,7 +38,9 @@
         <module name="SpringMVC_demo1" />
         <module name="SpringMVC_demo2" />
         <module name="SpringMVC_Exception" />
+        <module name="SpringRedis" />
         <module name="Struts2" />
+        <module name="Thread" />
         <module name="XMLUtils" />
       </profile>
       <profile default="false" name="Annotation profile for SpringBoot" enabled="true">
@@ -56,6 +59,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Algorithm" target="1.5" />
       <module name="CommonsConfiguration" target="1.5" />
       <module name="EncryUtils" target="1.5" />
       <module name="Hibernate" target="1.5" />
@@ -73,7 +77,9 @@
       <module name="SpringMVC_demo1" target="1.5" />
       <module name="SpringMVC_demo2" target="1.5" />
       <module name="SpringMVC_Exception" target="1.5" />
+      <module name="SpringRedis" target="1.5" />
       <module name="Struts2" target="1.5" />
+      <module name="Thread" target="1.5" />
       <module name="XMLUtils" target="1.5" />
     </bytecodeTargetLevel>
   </component>

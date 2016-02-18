@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Algorithm/Algorithm.iml" filepath="$PROJECT_DIR$/Algorithm/Algorithm.iml" />
       <module fileurl="file://$PROJECT_DIR$/CommonsConfiguration/CommonsConfiguration.iml" filepath="$PROJECT_DIR$/CommonsConfiguration/CommonsConfiguration.iml" />
       <module fileurl="file://$PROJECT_DIR$/EncryUtils/EncryUtils.iml" filepath="$PROJECT_DIR$/EncryUtils/EncryUtils.iml" />
       <module fileurl="file://$PROJECT_DIR$/Hibernate/Hibernate.iml" filepath="$PROJECT_DIR$/Hibernate/Hibernate.iml" />
@@ -20,7 +21,9 @@
       <module fileurl="file://$PROJECT_DIR$/SpringMVC_Exception/SpringMVC_Exception.iml" filepath="$PROJECT_DIR$/SpringMVC_Exception/SpringMVC_Exception.iml" />
       <module fileurl="file://$PROJECT_DIR$/SpringMVC_demo1/SpringMVC_demo1.iml" filepath="$PROJECT_DIR$/SpringMVC_demo1/SpringMVC_demo1.iml" />
       <module fileurl="file://$PROJECT_DIR$/SpringMVC_demo2/SpringMVC_demo2.iml" filepath="$PROJECT_DIR$/SpringMVC_demo2/SpringMVC_demo2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringRedis/SpringRedis.iml" filepath="$PROJECT_DIR$/SpringRedis/SpringRedis.iml" />
       <module fileurl="file://$PROJECT_DIR$/Struts2/Struts2.iml" filepath="$PROJECT_DIR$/Struts2/Struts2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Thread/Thread.iml" filepath="$PROJECT_DIR$/Thread/Thread.iml" />
       <module fileurl="file://$PROJECT_DIR$/XMLUtils/XMLUtils.iml" filepath="$PROJECT_DIR$/XMLUtils/XMLUtils.iml" />
     </modules>
   </component>
