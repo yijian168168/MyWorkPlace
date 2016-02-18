@@ -1,0 +1,155 @@
+Application状态对象
+Application 对象是HttpApplication 类的实例，将在客户端第一期从某个特定的ASP.NET应用程序虚拟目录中请求任何URL 资源时创建。对于Web 应用上的每个ASP.NET 应用程序都要创建一个单独的实例。然后通过内部Application 对象公开对每个实例进行引用。
+1．Application 对象的特性
+对于 Application 对象有如下特性：
+数据可以在 Application 对象之内进行数据共享，一个Application 对象可以覆盖多个用户。
+Application 对象可以用Internet Service Manager 来设置而获得不同的属性。
+ 单独的 Application 对象可以隔离出来并运行在内存之中。
+可以停止一个 Application 对象而不会影响到其他Application 对象。Application 对象常用的属性有：
+AllKey：获取HttpApplicationState 集合中的访问键。
+Count：获取HttpApplicationState 集合中的对象数。
+其中 Application 对象的常用方法有：
+Add：新增一个Application 对象变量。
+Clear：清除全部的Application 对象变量。
+Get：通过索引关键字或变量名称得到变量的值。
+GetKey：通过索引关键字获取变量名称。
+Lock：锁定全部的Application 对象变量。
+UnLock：解锁全部的Application 对象变量。
+Remove：使用变量名称移除一个Application 对象变量。
+RemoveAll：移除所有的Application 对象变量。
+Set：使用变量名更新一个Application 对象变量。
+
+2．Application 对象的使用
+通过使用 Application 对象的方法，能够对Application 对象进行操作，使用Add 方法能够创建Application 对象，示例代码如下所示。
+Application.Add("App", "MyValue"); // 增加Application 对象
+Application.Add("App1", "MyValue1"); // 增加Application 对象
+Application.Add("App2", "MyValue2"); // 增加Application 对象
+若需要使用 Application 对象，可以通过索引Application 对象的变量名进行访问，示例代码如下所示：
+Response.Write(Application["App1"].ToString()); // 输出Application 对象
+上述代码直接通过使用变量名来获取 Application 对象的值。通过Application 对象的Get方法也能够获取Application 对象的值，示例代码如下所示。
+for (int i = 0; i < Application.Count; i++) // 遍历Application 对象
+{
+Response.Write(Application.Get(i).ToString()); // 输出Application 对象
+}
+Application 对象通常可以用来统计在线人数，在页面加载后可以通过配置文件使用Application 对象的Add 方法进行Application 对象的创建，当用户离开页面时，可以使用Application 对象的Remove 方法进行Application 对象的移除。当Web 应用不希望用户在客户端修改已经存在的Application 对象时，可以使用Lock 对象进行锁定，当执行完毕相应的代码块后，可以解锁。示例代码如下所示。
+Application.Lock(); // 锁定Application 对象
+Application["App"] = "MyValue3"; //Application对象赋值
+Application.UnLock(); // 解锁Application 对象
+上述代码当用户进行页面访问时，其客户端的 Application 对象被锁定，所以用户的客户端不能够进行Application 对象的更改。在锁定后，也可以使用UnLock 方法进行解锁操作。
+
+
+Session状态对象
+Session 对象是HttpSessionState 的一个实例，Session 是用来存储跨页程序的变量或对象，功能基本同Application 对象一样。但是Session 对象的特性与Application 对象不同。Session 对象变量只针对单一网页的使用者，这也就是说各个机器之间的Session 的对象不尽相同。
+例如用户 A 和用户B，当用户A 访问该Web 应用时，应用程序可以显式的为该用户增加一个Session 值，同时用户B 访问该Web 应用时，应用程序同样可以为用户B 增加一个Session 值。但是与Application 不同的是，用户A 无法存取用户B 的Session 值，用户B 也无法存取用户A 的Session 值。Application 对象终止于IIS 服务停止，但是Session 对象变量终止于联机机器离线时，也就是说当网页使用者关闭浏览器或者网页使用者在页面进行的操作时间超过系统规定时,Session 对象将会自动注销。
+1．Session 对象的特性
+Session 对象常用的属性有：
+ IsNewSession：如果用户访问页面时是创建新会话，则此属性将返回true，否则将返回false。
+TimeOut：传回或设置Session 对象变量的有效时间，如果在有效时间内有没有任何客户端动作，则会自动注销。
+注意：如果不设置 TimeOut 属性，则系统默认的超时时间为20 分钟。
+Session 对象常用的方法有：
+Add：创建一个Session 对象。
+Abandon：该方法用来结束当前会话并清除对话中的所有信息，如果用户重新访问页面，则可以创建新会话。
+ Clear：此方法将清除全部的Session 对象变量，但不结束会话。注意：Session 对象可以不需要Add 方法进行创建，直接使用Session[“变量名”]=变量值的语法也可以进行Session 对象的创建。
+
+2．Session 对象的使用
+Session 对象可以使用于安全性相比之下较高的场合，例如后台登录。在后台登录的制作过程中，管理员拥有一定的操作时间，而如果管理员在这段时间不进行任何操作的话，为了保证安全性，后台将自动注销，如果管理员需要再次进行操作，则需要再次登录。在管理员登录时，如果登录成功，则需要给管理员一个Session 对象，示例代码如下所示。
+protected void Button1_Click(object sender, EventArgs e)
+{
+Session["admin"] = "guojing"; //新增Session对象
+Response.Redirect("Session.aspx"); //页面跳转
+}
+当管理员单击注销按钮时，则会注销Session 对象并提示再次登录，示例代码如下所示。
+protected void Button2_Click(object sender, EventArgs e)
+{
+Session.Clear(); // 删除所有Session 对象
+Response.Redirect("Session.aspx");
+}
+在Page_Load 方法中，可以判断是否已经存在Session 对象，如果存在Session 对象，则说明管理员当前的权限是正常的，而如果不存在Session 对象，则说明当前管理员的权限可能是错误的，或者是非法用户正在访问该页面，示例代码如下所示。
+protected void Page_Load(object sender, EventArgs e)
+{
+if (Session["admin"] != null) // 如果Session[“admin”]不为空
+{
+if (String.IsNullOrEmpty(Session["admin"].ToString())) //则判断是否为空字符串
+{
+Button1.Visible = true; //显式登录控件
+Button2.Visible = false; //隐藏注销控件
+//Response.Redirect("admin_login.aspx"); //跳转到登录页面
+}
+else
+{
+Button1.Visible = false; //显式注销控件
+Button2.Visible = true; //隐藏注销控件
+}
+}
+}
+上述代码当管理员没有登录时，则会出现登录按钮，如果登录了，存在Session 对象，则登录按钮被隐藏，只显示注销按钮。其HTML 代码如下所示。
+<asp:Button ID="Button1" runat="server" onclick="Button1_Click" Text="登录" />
+<asp:Button ID="Button2" runat="server" onclick="Button2_Click" Text="注销" />
+当再次单击【注销】按钮时则会清空Session 对象，再次返回登录。
+
+
+Cookie状态对象
+Session 对象能够保存用户信息，但是Session 对象并不能够持久的保存用户信息，当用户在限定时间内没有任何操作时，用户的Session 对象将被注销和清除，在持久化保存用户信息时，Session 对象并不适用。
+1．Cookie 对象
+使用 Cookie 对象能够持久化的保存用户信息，相比于Session 对象和Application 对象而言，Cookie 对象保存在客户端，而Session 对象和Application 对象保存在服务器端，所以Cookie 对象能够长期保存。Web 应用程序可以通过获取客户端的Cookie 的值来判断用户的身份来进行认证。
+ASP.NET 内包含两个内部的Cookie 集合。通过HttpRequest 的Cookies 集合来进行访问，Cookie 不是Page 类的子类，所以使用方法和Session 和Application 不同。相比于Session和Application 而言，Cookie 的优点如下所示:
+可以配置到期的规则：Cookie 可以在浏览器会话结束后立即到期，也可以在客户端中无限保存。
+ 简单：Cookie 是一种基于文本的轻量级结构，包括简单的键值对。
+ 数据持久性：Cookie 能够在客户端上长期进行数据保存。
+无需任何服务器资源：Cookie 无需任何服务器资源，存储在本地客户端中。
+
+虽然 Cookie 包括若干优点，这些优点能够弥补Session 对象和Application 对象的不足，但是Cookie 对象同样有缺点，Cookie 的缺点如下所示:
+ 大小限制：Cookie 包括大小限制，并不能无限保存Cookie 文件。
+不确定性：如果客户端配置禁用Cookie 配置，则Web 应用中使用的Cookie 将被限制，客户端将无法保存Cookie。
+安全风险：现在有很多的软件能够伪装 Cookie，这意味着保存在本地的Cookie 并不安全，Cookie 能够通过程序修改为伪造，这会导致Web 应用在认证用户权限时会出现错误。
+Cookie 是一个轻量级的内置对象，Cookie 并不能将复杂和庞大的文本进行存储，在进行相应的信息或状态的存储时，应该考虑Cookie 的大小限制和不确定性。
+
+2．Cookie 对象的属性
+Cookie 对象的属性如下所示：
+ Name：获取或设置Cookie 的名称。
+ Value：获取或设置Cookie 的Value。
+Expires：获取或设置Cookie 的过期的日期和事件。
+ Version：获取或设置Cookie 的符合HTTP 维护状态的版本。
+
+3．Cookie 对象的方法
+Cookie 对象的方法如下所示：
+ Add：增加Cookie 变量。
+Clear：清除Cookie 集合内的变量。
+Get：通过变量名称或索引得到Cookie 的变量值。
+Remove：通过Cookie 变量名称或索引删除Cookie 对象。
+
+4．创建Cookie 对象
+通过 Add 方法能够创建一个Cookie 对象，并通过Expires 属性设置 Cookie 对象在客户端中所持续的时间，示例代码如下所示。
+HttpCookie MyCookie = new HttpCookie("MyCookie ");
+MyCookie.Value = Server.HtmlEncode(“我的Cookie 应用程序”); //设置Cookie 的值
+MyCookie.Expires = DateTime.Now.AddDays(5); //设置Cookie 过期时间
+Response.AppendCookie(MyCookie); //新增Cookie
+上述代码创建了一个名称为MyCookie 的Cookies，上述代码通过使用Response 对象的AppendCookie 方法进行Cookie 对象的创建，与之相同，可以使用Add 方法进行创建，示例代码如下所示。
+Response.Cookies.Add(MyCookie);
+上述代码同样能够创建一个Cookie 对象，当创建了Cookie 对象后，将会在客户端的Cookies 目录下建立文本文件，文本文件的内容如下所示。
+MyCookie
+MyCookie
+注意：Cookies 目录在Windows 下是隐藏目录，并不能直接对Cookies 文件夹进行访问，在该文件夹中可能存在多个Cookie 文本文件，这是由于在一些网站中进行登录保存了Cookies 的原因。
+
+5．获取Cookie 对象
+Web 应用在客户端浏览器创建Cookie 对象之后，就可以通过Cookie 的方法读取客户端中保存的Cookies 信息，示例代码如下所示。
+protected void Page_Load(object sender, EventArgs e)
+{
+try
+{
+HttpCookie MyCookie = new HttpCookie("MyCookie "); //创建Cookie 对象
+MyCookie.Value = Server.HtmlEncode("我的Cookie 应用程序");//Cookie 赋值
+MyCookie.Expires = DateTime.Now.AddDays(5);//Cookie 持续时间
+Response.AppendCookie(MyCookie); //添加Cookie
+Response.Write("Cookies 创建成功"); //输出成功
+Response.Write("<hr/>获取Cookie 的值<hr/>");
+HttpCookie GetCookie = Request.Cookies["MyCookie"]; //获取Cookie
+Response.Write("Cookies 的值:" + GetCookie.Value.ToString() + "<br/>"); //输出Cookie 值
+Response.Write("Cookies 的过期时间:" + GetCookie.Expires.ToString() +"<br/>");
+}
+catch
+{
+Response.Write("Cookies 创建失败"); //抛出异常
+}
+}
+上述代码创建一个Cookie 对象之后立即获取刚才创建的Cookie 对象的值和过期时间。通过Request.Cookies 方法可以通过Cookie 对象的名称或者索引获取Cookie 的值。在一些网站或论坛中，经常使用到Cookie，当用户浏览并登录在网站后，如果用户浏览完毕并退出网站时，Web 应用可以通过Cookie 方法对用户信息进行保存。当用户再次登录时，可以直接获取客户端的Cookie 的值而无需用户再次进行登录操作。
