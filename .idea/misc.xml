@@ -28,6 +28,7 @@
         <option value="$PROJECT_DIR$/Algorithm/pom.xml" />
         <option value="$PROJECT_DIR$/SpringRedis/pom.xml" />
         <option value="$PROJECT_DIR$/Thread/pom.xml" />
+        <option value="$PROJECT_DIR$/Hibernate-HbmXml/pom.xml" />
       </list>
     </option>
   </component>

@@ -26,6 +26,7 @@
         <module name="CommonsConfiguration" />
         <module name="EncryUtils" />
         <module name="Hibernate" />
+        <module name="Hibernate-HbmXml" />
         <module name="HttpClient" />
         <module name="JDBC_Simple" />
         <module name="Jedis_demo1" />
@@ -63,6 +64,7 @@
       <module name="CommonsConfiguration" target="1.5" />
       <module name="EncryUtils" target="1.5" />
       <module name="Hibernate" target="1.5" />
+      <module name="Hibernate-HbmXml" target="1.5" />
       <module name="HttpClient" target="1.5" />
       <module name="JDBC_Simple" target="1.5" />
       <module name="Jedis_demo1" target="1.5" />

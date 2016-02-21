@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <package name="exceptionPackage" namespace="/exception" extends="struts-default">
+
+        <!--
+        声明式异常分为“全局异常映射”和“局部异常映射”
+        -->
+
+        <!-- A、全局异常-->
+        <global-results>
+            <result name="globalException">/WEB-INF/view/error.jsp</result>
+        </global-results>
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="globalException" />
+        </global-exception-mappings>
+
+        <!--B、局部异常-->
+        <action name="*" class="com.exception.ExceptionTest" method="{1}">
+            <exception-mapping exception="java.lang.NullPointerException" result="nullPointerException"/>
+            <result name="nullPointerException">/WEB-INF/view/NullPointerException.jsp</result>
+            <result >/WEB-INF/view/success.jsp</result>
+        </action>
+    </package>
+</struts>
