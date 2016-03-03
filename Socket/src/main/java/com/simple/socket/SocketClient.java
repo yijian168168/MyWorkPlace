@@ -23,6 +23,7 @@ public class SocketClient {
         DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
         dataOutputStream.writeUTF(msg);
         dataOutputStream.close();
+        socket.shutdownOutput();
         socket.close();
     }
 }
